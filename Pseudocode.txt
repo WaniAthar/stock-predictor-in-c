@@ -1,0 +1,52 @@
+markov(buyer,stockhistory[])
+    float buyProbab,float sellProbab;
+    float holdProbab,float trMtrx[2][2]; 
+    float piMtrx1[2][2],float piMtrx2[2][2],float piMtrx3[2][2],float result[2][2],float array[3]
+    int sell, buy, hold;
+    array stockname[]
+    for(i=0 to quantity)
+            stockname <- user.stockname
+            stockname + ".txt"
+            grabStockPrice(stockname, stockhistory)    // takes the data from the csv file 
+            stockhistory2 <-stockhistory
+            for j = 0 to 12
+	for k  = 0 to 12
+	if (round(stockhistory[j]) > round(stockhistory[k]))
+                    sell++
+                else if (round(stockhistory[j]) < round(stockhistory[k]))
+                    buy++
+                else if (round(stockhistory[j]) == round(stockhistory[k]))
+                    hold++;    
+            array[0] = sell/12 // probability of sell
+            array[1] = buy/12 // probability of buy
+            array[2] = hold/12 // probability of hold 
+
+            trMtrx = [array[0], x1, x2]         //transition matrix
+	         [y0,array[1], y2]
+	         [z0, z1, array[2]]
+            piMtrx1= [1,] 
+	          [0,]
+	          [0 ]
+            piMtrx2= [0,] 
+	          [1,]
+	          [0 ]
+             piMtrx3= [0,] 
+	          [0,]
+	          [1 ]
+            result1<- Mul(piMtrx1,trMtrx) 
+            result2<- Mul(piMtrx2,trMtrx)
+            result3<- Mul(piMtrx3,trMtrx) 
+
+            buyProbab <-  max(result1, 3)       // probability for buy
+            sellProbab <-  max(result2, 3)      // probability for sell
+            holdProbab <-  max(result3, 3)       // probability for hold
+            final <- maxNum(buyProbab, sellProbab, holdProbab)
+            if final == buyProbab
+	print "user has to buy this stock"
+            else if final == sellProbab
+	print "user has to sell this stock"
+            else
+	print "user has to hold this stock"
+            
+	         
+	         
